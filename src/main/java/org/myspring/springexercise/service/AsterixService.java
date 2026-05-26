@@ -2,7 +2,7 @@ package org.myspring.springexercise.service;
 
 import lombok.RequiredArgsConstructor;
 import org.myspring.springexercise.dto.CharacterDto;
-import org.myspring.springexercise.model.Character;
+import org.myspring.springexercise.model.AsterixCharacter;
 import org.myspring.springexercise.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -15,41 +15,41 @@ public class AsterixService {
     private final CharacterRepository characterRepository;
     private final IdService idService;
 
-    public List<Character> getCharacter(Character filter) {
-        return characterRepository.findAll().stream().filter(character ->
+    public List<AsterixCharacter> getCharacter(AsterixCharacter filter) {
+        return characterRepository.findAll().stream().filter(asterixCharacter ->
                 (filter.name() == null || filter.name().isBlank()
-                        || character.name().equalsIgnoreCase(filter.name()))
+                        || asterixCharacter.name().equalsIgnoreCase(filter.name()))
 
                         && (filter.profession() == null || filter.profession().isBlank()
-                        || character.profession().equalsIgnoreCase(filter.profession()))
+                        || asterixCharacter.profession().equalsIgnoreCase(filter.profession()))
 
                         && (filter.age() == null
-                        || character.age().equals(filter.age()))
+                        || asterixCharacter.age().equals(filter.age()))
         ).toList();
     }
 
-    public List<Character> getCharacter(@PathVariable String id) {
+    public List<AsterixCharacter> getCharacter(@PathVariable String id) {
         return characterRepository.findCharactersById(id);
     }
 
     public void saveCharacter(CharacterDto characterDto) {
-        Character character = Character.builder()
+        AsterixCharacter asterixCharacter = AsterixCharacter.builder()
                 .id(idService.randomId())
                 .name(characterDto.name())
                 .age(characterDto.age())
                 .profession(characterDto.profession())
                 .build();
 
-        characterRepository.save(character);
+        characterRepository.save(asterixCharacter);
     }
 
-    public void saveCharacters(List<Character> characters) {
-        characterRepository.saveAll(characters);
+    public void saveCharacters(List<AsterixCharacter> asterixCharacters) {
+        characterRepository.saveAll(asterixCharacters);
     }
 
-    public void updateCharacters(@RequestBody Character character) {
-        characterRepository.findById(character.id()).orElseThrow();
-        characterRepository.save(character);
+    public void updateCharacters(@RequestBody AsterixCharacter asterixCharacter) {
+        characterRepository.findById(asterixCharacter.id()).orElseThrow();
+        characterRepository.save(asterixCharacter);
     }
 
     public void deleteCharacter(@PathVariable String id) {

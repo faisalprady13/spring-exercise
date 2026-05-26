@@ -2,8 +2,7 @@ package org.myspring.springexercise.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.myspring.springexercise.dto.CharacterDto;
-import org.myspring.springexercise.model.Character;
-import org.myspring.springexercise.repository.CharacterRepository;
+import org.myspring.springexercise.model.AsterixCharacter;
 import org.myspring.springexercise.service.AsterixService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +15,12 @@ public class AsterixController {
     private final AsterixService asterixService;
 
     @GetMapping("")
-    public List<Character> getCharacter(@ModelAttribute Character filter) {
+    public List<AsterixCharacter> getCharacter(@ModelAttribute AsterixCharacter filter) {
         return asterixService.getCharacter(filter);
     }
 
     @GetMapping("/{id}")
-    public List<Character> getCharacter(@PathVariable String id) {
+    public List<AsterixCharacter> getCharacter(@PathVariable String id) {
         return asterixService.getCharacter(id);
     }
 
@@ -31,13 +30,13 @@ public class AsterixController {
     }
 
     @PostMapping("/batch")
-    public void saveCharacters(@RequestBody List<Character> characters) {
-        asterixService.saveCharacters(characters);
+    public void saveCharacters(@RequestBody List<AsterixCharacter> asterixCharacters) {
+        asterixService.saveCharacters(asterixCharacters);
     }
 
     @PutMapping("")
-    public void updateCharacters(@RequestBody Character character) {
-        asterixService.updateCharacters(character);
+    public void updateCharacters(@RequestBody AsterixCharacter asterixCharacter) {
+        asterixService.updateCharacters(asterixCharacter);
     }
 
     @DeleteMapping("/{id}")

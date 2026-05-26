@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Builder
 @Document("characters")
-public record Character(String id, String name, Integer age, String profession) {
+public record AsterixCharacter(String id, String name, Integer age, String profession) {
 }
